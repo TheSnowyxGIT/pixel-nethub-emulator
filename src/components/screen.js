@@ -32,7 +32,6 @@ export default class Screen extends Component {
   }
 
   applyBuffer(buffer) {
-    console.log(this.props.resolution.width, this.props.resolution.height);
     this.matrix = PixelMatrix.FromBuffer(
       buffer,
       this.props.resolution.width,
