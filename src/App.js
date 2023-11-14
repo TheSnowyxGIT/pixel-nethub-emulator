@@ -9,6 +9,7 @@ window.Buffer = Buffer;
 function App() {
   const screenRef = React.useRef(null);
   const [screenConnected, setScreenConnected] = React.useState(false);
+  const [resolution, setResolution] = React.useState({ width: 32, height: 8 });
 
   useEffect(() => {
     let closeRequested = false;
@@ -33,7 +34,7 @@ function App() {
         } else {
           const { width, height } = JSON.parse(event.data);
           if (width && height) {
-            screenRef.current?.changeResolution(width, height);
+            setResolution({ width, height });
           }
         }
       };
@@ -80,11 +81,7 @@ function App() {
       <h1 className="text-2xl">Screen Visualizer</h1>
       {screenConnected ? (
         <div className="mx-16 w-full h-[600px]">
-          <Screen
-            ref={screenRef}
-            className="h-full"
-            resolution={{ width: 32, height: 8 }}
-          />
+          <Screen ref={screenRef} className="h-full" resolution={resolution} />
         </div>
       ) : (
         <span className="text-red-500">No IoT device connected!</span>
